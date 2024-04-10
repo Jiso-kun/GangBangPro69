@@ -65,6 +65,7 @@ end
 local SilentAimFOVCircle = Drawing.new("Circle")
 SilentAimFOVCircle.Visible = false
 SilentAimFOVCircle.Color = Color3.fromRGB(255, 255, 255)
+SilentAimFOVCircle.Filled = false
 --
 do -- Functions
     function UpdateFOV()
@@ -73,7 +74,7 @@ do -- Functions
         SilentAimFOVCircle.Visible = Rasma.FOV.SilentAim.Visible
         SilentAimFOVCircle.Color = Rasma.FOV.SilentAim.Color
         SilentAimFOVCircle.Radius = Rasma.FOV.SilentAim.Size * 3
-        SilentAimFOVCircle.Filled = Rasma.SilentAim.Enabled and Rasma.FOV.SilentAim.Filled and true or false
+        SilentAimFOVCircle.Filled = Rasma.FOV.SilentAim.Filled
         SilentAimFOVCircle.Transparency = Rasma.FOV.SilentAim.Transparency
         --
         if Rasma.FOV.SilentAim.Position == "Center" then
