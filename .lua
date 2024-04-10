@@ -112,7 +112,7 @@ do -- Functions
             --
             -- // Checks
             if not Rasma.SilentAim.Enabled then continue end
-            if Rasma.Checks.SilentAim.KnockedCheck and Player.Character:FindFirstChild("BodyEffects") and Player.Character.BodyEffects["K.O"].Value or Player.Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil then continue end
+            if Rasma.Checks.SilentAim.KnockedCheck and CurrentGame == 1008451066 and Player.Character:FindFirstChild("BodyEffects") and Player.Character.BodyEffects["K.O"].Value or Player.Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil then continue end
             if Rasma.Checks.SilentAim.WallCheck and not RayCast(RootPart, Camera.CFrame.Position, {LocalPlayer.Character}) then continue end
             if Rasma.Checks.SilentAim.AliveCheck and not (Humanoid.Health > 0) then continue end
             --
