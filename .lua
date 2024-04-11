@@ -2,6 +2,7 @@
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
+local SoundService = game:GetService("SoundService")
 --
 repeat task.wait() until game:IsLoaded() and (Players.LocalPlayer.Character or Players.LocalPlayer.CharacterAdded:Wait())
 --
@@ -54,12 +55,28 @@ local DHGames = {
 do -- Preload
     if DHGames[game.GameId] then
         CurrentGame = DHGames[game.GameId]
+        RemoteEvent = CurrentGame.Functions.GetRemote()
     else
         MouseArguments = "UpdateMousePos"
 		RemoteEvent = game:GetService("ReplicatedStorage").MainEvent
     end
-
-	RemoteEvent = CurrentGame.Functions.GetRemote()
+    --
+    if Rasma.AutoSettings.LowGFX then
+        for Index, Value in pairs(workspace:GetDescendants()) do
+            if Value.ClassName == "Part" or Value.ClassName == "SpawnLocation" or Value.ClassName == "WedgePart" or Value.ClassName == "Terrain" or Value.ClassName == "MeshPart" then
+                Value.Material = "Plastic"
+            end
+        end
+    end
+    --
+    if Rasma.AutoSettings.MuteBoomboxes then
+        for Index, Value in ipairs(workspace:GetDescendants()) do
+            if Value:IsA("Sound") then
+                Value:Stop()
+                Value:Destroy()
+            end
+        end
+    end
 end
 --
 local SilentAimFOVCircle = Drawing.new("Circle")
