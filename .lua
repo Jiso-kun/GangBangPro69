@@ -1,3 +1,40 @@
+getgenv().Rasma = {
+    ["Preload"] = {
+        Notifications = true,
+    },
+    ["SilentAim"] = {
+        Enabled = true,
+        UseKeybind = true,
+        Keybind = "T",
+        HitPart = "HumanoidRootPart",
+        Prediction = 0.13731284913,
+    },
+    ["FOV"] = {
+        ["SilentAim"] = {
+            Visible = true,
+            Size = 40,
+            Color = Color3.fromRGB(255, 255, 255),
+            Filled = true,
+            Transparency = 0.5,
+            Position = "Mouse", -- // "Mouse" or "Center"
+        },
+    },
+    ["Safety"] = {
+        AntiGroundShots = true,
+        AntiAimViewer = true,
+    },
+    ["Checks"] = {
+        ["SilentAim"] = {
+            WallCheck = true,
+            KnockedCheck = true,
+            AliveCheck = true,
+        },
+    },
+    ["AutoSettings"] = {
+        LowGFX = true,
+        MuteBoomboxes = true,
+    },
+}
 -- // Services
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -49,17 +86,26 @@ local DHGames = {
 				return game:GetService("ReplicatedStorage").MainRemote
 			end
 		},
-	}
+	},
+    ["Universal"] = {
+        Name = "Universal",
+        MouseArguments = "UpdateMousePos",
+        Functions = {
+            GetRemote = function()
+                return game:GetService("ReplicatedStorage").MainEvent
+            end
+        },
+    }
 }
 --
 do -- Preload
     if DHGames[game.GameId] then
         CurrentGame = DHGames[game.GameId]
-        RemoteEvent = CurrentGame.Functions.GetRemote()
     else
-        MouseArguments = "UpdateMousePos"
-		RemoteEvent = game:GetService("ReplicatedStorage").MainEvent
+        CurrentGame = DHGames["Universal"]
     end
+    --
+    RemoteEvent = CurrentGame.Functions.GetRemote()
     --
     if Rasma.AutoSettings.LowGFX then
         for Index, Value in pairs(workspace:GetDescendants()) do
